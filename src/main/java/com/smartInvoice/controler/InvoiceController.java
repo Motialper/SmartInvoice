@@ -1,8 +1,9 @@
 package com.smartInvoice.controler;
 
-import com.smartInvoice.model.Invoice;
-import com.smartInvoice.service.InvoiceService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,16 +12,11 @@ import java.util.List;
 @RequestMapping("/api/invoices")
 public class InvoiceController {
 
-    @Autowired
-    private InvoiceService invoiceService;
 
-    @PostMapping
-    public Invoice createInvoice(@RequestBody Invoice invoice) {
-        return invoiceService.saveInvoice(invoice);
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<?> hello()
+    {
+        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
     }
 
-    @GetMapping
-    public List<Invoice> getAllInvoices() {
-        return invoiceService.getAllInvoices();
-    }
 }
