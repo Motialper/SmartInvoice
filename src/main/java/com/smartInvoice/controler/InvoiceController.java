@@ -27,7 +27,6 @@ public class InvoiceController {
         Invoice invoice = invoiceIn.toInvoice();
         return invoiceService.saveInvoice(invoice);
     }
-
     @GetMapping
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
