@@ -10,6 +10,7 @@ import java.util.Date;
 /**
  * This class represents an invoice entity for the database.
  */
+
 @Entity
 @Table(name = "invoice")
 public class Invoice implements Serializable {
