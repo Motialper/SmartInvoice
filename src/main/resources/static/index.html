@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Management</title>
+</head>
+<body>
+<h1>Invoice Management</h1>
+<h2>Upload Invoice</h2>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept="application/pdf,image/png,image/jpeg">
+    <button type="submit">Upload</button>
+</form>
+
+<h2>All Invoices</h2>
+<ul id="invoiceList"></ul>
+
+<script>
+        document.getElementById('uploadForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/api/invoices/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+
+                const invoice = await response.json();
+                alert('Upload successful');
+                // Optionally, update the invoice list here
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error uploading invoice');
+            }
+        });
+
+        async function fetchInvoices() {
+            const response = await fetch('/api/invoices');
+            const invoices = await response.json();
+            const invoiceList = document.getElementById('invoiceList');
+            invoiceList.innerHTML = '';
+
+            invoices.forEach(invoice => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Vendor: ${invoice.vendor}, Category: ${invoice.category}, Amount: ${invoice.amount}`;
+                invoiceList.appendChild(listItem);
+            });
+        }
+
+        fetchInvoices();
+    </script>
+</body>
+</html>
