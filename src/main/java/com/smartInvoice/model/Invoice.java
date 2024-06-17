@@ -13,7 +13,6 @@ import java.util.Date;
 @Entity
 @Table(name = "invoice")
 public class Invoice implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     /**
