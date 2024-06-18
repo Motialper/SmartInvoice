@@ -11,14 +11,14 @@ public class InvoiceIn implements Serializable {
 
     public Invoice toInvoice() {
         Invoice invoice = new Invoice();
-        invoice.setVendor(this.vendor);
+
         invoice.setCategory(this.category);
         invoice.setAmount(this.amount);
         return invoice;
     }
 
     public void updateInvoice(Invoice invoice) {
-        invoice.setVendor(this.vendor);
+
         invoice.setCategory(this.category);
         invoice.setAmount(this.amount);
     }
